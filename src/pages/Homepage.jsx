@@ -1,30 +1,23 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import GlobalContext from "../contexts/GlobalContext";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 function Homepage() {
-    const [data, setData] = useState([])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/api/products`);
-                setData(res.data.results);
-            }
-            catch (err) {
-                console.error(err);
-            }
-        };
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
+    const { products } = useContext(GlobalContext)
 
     return (
         <>
+            <div>
+                <ul>
+                    {products && products.map((product) =>
+                    (
+                        <li key={product.id}>{product.name} <Link to={`/product/${product.id}`}>DETAIL</Link></li>
+                    )
+                    )}
+                </ul>
+            </div>
         </>
     )
 }
