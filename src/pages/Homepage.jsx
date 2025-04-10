@@ -24,7 +24,11 @@ function Homepage() {
                             <div className="flex flex-col items-end">
                                 <h2 className="text-xl font-bold mb-1">{product.name}</h2>
                                 <h3 className="text-lg text-gray-700  font-semibold mb-3">{product.company.name}</h3>
-                                <p className="text-lg border p-1 rounded-md bg-green-700 text-white font-bold">{product.price} &euro;</p>
+                                <div className="flex gap-1">
+                                    <p className="text-lg border p-1 rounded-md bg-yellow-500 line-through text-white font-bold">&euro;{product.price}</p>
+                                    <p className="text-lg border p-1 rounded-md bg-green-700 text-white font-bold">&euro;{((product.price / 100) * (100 - product.tag.price_reduction_percentage)).toFixed(2)}</p>
+                                </div>
+
                             </div>
                             <Link
                                 to={`/product/${product.id}`}

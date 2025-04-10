@@ -30,7 +30,10 @@ function DetailPage() {
                         <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
                         <h2 className="text-lg text-gray-700  font-semibold mb-3">{product.company.name}</h2>
                         <p className="text-gray-700 mb-6">{product.description}</p>
-                        <p className="text-lg border p-1 rounded-md bg-green-700 text-white font-bold">{product.price} &euro;</p>
+                        <div className="flex gap-1">
+                            <p className="text-lg border p-1 rounded-md bg-yellow-500 line-through text-white font-bold">&euro;{product.price}</p>
+                            <p className="text-lg border p-1 rounded-md bg-green-700 text-white font-bold">&euro;{((product.price / 100) * (100 - product.tag.price_reduction_percentage)).toFixed(2)}</p>
+                        </div>
                     </div>
                 </div>
                 <Link
